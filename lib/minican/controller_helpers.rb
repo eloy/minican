@@ -17,7 +17,7 @@ module Minican
       end
     end
 
-    def user_is?(action, model)
+    def user_is?(action, model=nil)
       if user_signed_in?
         current_user.is? action, model
       else
@@ -25,7 +25,7 @@ module Minican
       end
     end
 
-    def user_is_not?(action, model)
+    def user_is_not?(action, model=nil)
       !user_is?(action, model)
     end
 
