@@ -24,18 +24,26 @@ module Minican
     end
 
 
-    def can?(action, model)
+    def can?(action, model=nil)
       method_name = Minican::callback_name(self.class, action, "can")
-      model.send method_name, self
+      if model.nil?
+        self.send method_name
+      else
+        model.send method_name, self
+      end
     end
 
-    def cannot?(action, model)
+    def cannot?(action, model=nil)
       !can?(action, model)
     end
 
-    def is?(action, model)
+    def is?(action, model=nil)
       method_name = Minican::callback_name(self.class, action, "is")
-      model.send method_name, self
+      if model.nil?
+        self.send method_name
+      else
+        model.send method_name, self
+      end
     end
 
     def is_not?(action, model)

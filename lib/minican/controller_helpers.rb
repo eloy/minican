@@ -9,7 +9,7 @@ module Minican
     #   end
     # end
 
-    def user_can?(action, model)
+    def user_can?(action, model=nil)
       if user_signed_in?
         current_user.can? action, model
       else
@@ -29,11 +29,11 @@ module Minican
       !user_is?(action, model)
     end
 
-    def ensure_user_can!(action, model)
+    def ensure_user_can!(action, model=nil)
       raise Minican::NotAllowedError.new(action, model) unless user_can?(action, model)
     end
 
-    def ensure_user_is!(action, model)
+    def ensure_user_is!(action, model=nil)
       raise Minican::UserRoleMismatchError.new(action, model) unless user_is?(action, model)
     end
 
